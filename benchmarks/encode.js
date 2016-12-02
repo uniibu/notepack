@@ -1,5 +1,6 @@
 var notepack = require('../');
 var msgpackJs = require('msgpack-js');
+var msgpackLite = require('msgpack-lite');
 var data = require('./data');
 
 var Benchtable = require('benchtable');
@@ -12,6 +13,9 @@ suite
 })
 .addFunction('msgpack-js', function (x) {
   msgpackJs.encode(x);
+})
+.addFunction('msgpack-lite', function (x) {
+  msgpackLite.encode(x);
 })
 // Note: JSON encodes buffers as arrays
 .addFunction('JSON.stringify (to Buffer)', function (x) {

@@ -22,7 +22,8 @@
     "chai": "^3.5.0",
     "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
-    "msgpack-js": "^0.3.0"
+    "msgpack-js": "^0.3.0",
+    "msgpack-lite": "^0.1.26"
   },
   "scripts": {
     "test": "./node_modules/.bin/mocha -r ./test/support/env -R dot ./test",
