@@ -35,6 +35,8 @@ function check(value, hex) {
 }
 
 describe('notepack', function () {
+  this.timeout(10000);
+
   it('positive fixint', function () {
     check(0x00, '00');
     check(0x44, '44');
