@@ -185,6 +185,9 @@ describe('notepack', function () {
   });
 
   it('str 8', function () {
+    check('α', 'a2ceb1');
+    check('亜', 'a3e4ba9c');
+    check('\uD83D\uDC26', 'a4f09f90a6');
     check('a'.repeat(32), 'd9' + '20' + '61'.repeat(32));
     check('a'.repeat(255), 'd9' + 'ff' + '61'.repeat(255));
   });
