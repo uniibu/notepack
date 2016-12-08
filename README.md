@@ -25,6 +25,18 @@ var encoded = notepack.encode({ foo: 'bar'}); // <Buffer 81 a3 66 6f 6f a3 62 61
 var decoded = notepack.decode(encoded); // { foo: 'bar' }
 ```
 
+## Browser
+
+A browser version of notepack is also available (29.5 kB minified)
+
+```html
+<script src="https://rawgit.com/darrachequesne/notepack/master/dist/notepack.js"></script>
+<script>
+  console.log(notepack.decode(notepack.encode([1, '2', new Date()])));
+  // [1, "2", Thu Dec 08 2016 00:00:01 GMT+0100 (CET)]
+</script>
+```
+
 ## Performance
 
 Performance is currently comparable to msgpack-node (which presumably needs optimizing and suffers from JS-native overhead) and is significantly faster than other implementations. Several micro-optimizations are used to improve the performance of short string and Buffer operations.
