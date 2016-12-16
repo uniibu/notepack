@@ -93,8 +93,27 @@ describe('notepack', function () {
   // ext 8, ext 16, ext 32
   // There is currently no way to encode extension types
 
+  it('ext 8', function () {
+    checkDecode([127, new Buffer('hello')], 'c7' + '05' + '7f' + '68656c6c6f');
+  });
+
+  it('ext 16', function () {
+    checkDecode([0, new Buffer('a'.repeat(256))], 'c8' + '0100' + '00' + '61'.repeat(256));
+  });
+
+  it('ext 32', function () {
+    checkDecode([-128, new Buffer('a'.repeat(65536))], 'c9' + '00010000' + '80' + '61'.repeat(65536));
+  });
+
   // float 32
   // JavaScript doesn't support single precision floating point numbers
+
+  it('float 32', function () {
+    var buf = Buffer(5);
+    buf.writeUInt8(0xca, 0);
+    buf.writeFloatBE(0.5, 1);
+    checkDecode(0.5, buf.toString('hex'));
+  });
 
   it('float 64', function () {
     check(1.1, 'cb' + '3ff199999999999a');
@@ -173,6 +192,15 @@ describe('notepack', function () {
 
   it('fixext 1 / undefined', function () {
     check(undefined, 'd40000');
+    checkDecode([127, new Buffer('a')], 'd4' + '7f' + '61');
+  });
+
+  it('fixext 2', function () {
+    checkDecode([127, new Buffer('ab')], 'd5' + '7f' + '6162');
+  });
+
+  it('fixext 4', function () {
+    checkDecode([127, new Buffer('abcd')], 'd6' + '7f' + '61626364');
   });
 
   it('fixext 8 / Date', function () {
@@ -182,6 +210,11 @@ describe('notepack', function () {
     check(new Date('2000-06-13T00:00:00.000Z'), 'd700000000dfb7629c00');
     check(new Date('2005-12-31T23:59:59.999Z'), 'd7000000010883436bff');
     check(new Date('2140-01-01T13:14:15.678Z'), 'd700000004e111a31efe');
+    checkDecode([127, new Buffer('abcd'.repeat(2))], 'd7' + '7f' + '61626364'.repeat(2));
+  });
+
+  it('fixext 16', function () {
+    checkDecode([-128, new Buffer('abcd'.repeat(4))], 'd8' + '80' + '61626364'.repeat(4));
   });
 
   it('str 8', function () {
