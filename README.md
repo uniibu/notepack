@@ -13,13 +13,13 @@ A fast [Node.js](http://nodejs.org) implementation of the latest [MessagePack](h
 ## Install
 
 ```
-npm install notepack
+npm install notepack.io
 ```
 
 ## Usage
 
 ```js
-var notepack = require('notepack');
+var notepack = require('notepack.io');
 
 var encoded = notepack.encode({ foo: 'bar'}); // <Buffer 81 a3 66 6f 6f a3 62 61 72>
 var decoded = notepack.decode(encoded); // { foo: 'bar' }
