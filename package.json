@@ -1,6 +1,6 @@
 {
   "name": "notepack.io",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "A fast Node.js implementation of the latest MessagePack spec",
   "main": "lib/index.js",
   "files": [
@@ -9,12 +9,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/coinative/notepack.git"
+    "url": "https://github.com/darrachequesne/notepack.git"
   },
   "author": "Ben Shepheard <ben@coinative.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/coinative/notepack/issues"
+    "url": "https://github.com/darrachequesne/notepack/issues"
   },
   "homepage": "https://github.com/coinative/notepack",
   "devDependencies": {
