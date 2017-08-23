@@ -1,3 +1,13 @@
+<a name="2.1.2"></a>
+## [2.1.2](https://github.com/darrachequesne/notepack/compare/2.1.1...2.1.2) (2017-08-23)
+
+
+### Bug Fixes
+
+* **encode:** remove the unsafe integer check ([#15](https://github.com/darrachequesne/notepack/issues/15)) ([bb8140c](https://github.com/darrachequesne/notepack/commit/bb8140c))
+
+
+
 <a name="2.1.1"></a>
 ## [2.1.1](https://github.com/darrachequesne/notepack/compare/2.1.0...2.1.1) (2017-08-08)
 
