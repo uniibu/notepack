@@ -50,6 +50,17 @@ describe('notepack (browser build)', function() {
     expect(notepack.encode(obj)).to.deep.equal(notepack.encode('c'));
   });
 
+  it('utf-8', function() {
+    // 1-byte
+    expect(notepack.decode(notepack.encode('äß'))).to.equal('äß');
+    // 2-byte
+    expect(notepack.decode(notepack.encode('עִבְרִית'))).to.equal('עִבְרִית');
+    // 3-byte
+    expect(notepack.decode(notepack.encode('\u13DA'))).to.equal('\u13DA');
+    // 4-byte
+    expect(notepack.decode(notepack.encode('🌐'))).to.equal('🌐');
+  });
+
   it('all formats', function () {
     this.timeout(20000);
     var expected = {
