@@ -1,6 +1,7 @@
 # notepack
 
-[![Build Status](https://travis-ci.org/coinative/notepack.svg?branch=master)](https://travis-ci.org/coinative/notepack) [![Coverage Status](https://img.shields.io/coveralls/coinative/notepack.svg)](https://coveralls.io/r/coinative/notepack?branch=master)
+[![Build Status](https://travis-ci.org/coinative/notepack.svg?branch=master)](https://travis-ci.org/coinative/notepack)
+[![Coverage Status](https://coveralls.io/repos/github/darrachequesne/notepack/badge.svg?branch=master)](https://coveralls.io/github/darrachequesne/notepack?branch=master)
 
 A fast [Node.js](http://nodejs.org) implementation of the latest [MessagePack](http://msgpack.org) [spec](https://github.com/msgpack/msgpack/blob/master/spec.md).
 
