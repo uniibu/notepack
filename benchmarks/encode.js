@@ -19,7 +19,7 @@ suite
 })
 // Note: JSON encodes buffers as arrays
 .addFunction('JSON.stringify (to Buffer)', function (x) {
-  new Buffer(JSON.stringify(x));
+  Buffer.from(JSON.stringify(x));
 })
 
 .addInput('tiny', [data.tiny])

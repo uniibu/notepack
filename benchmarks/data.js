@@ -26,7 +26,7 @@ const small = {
     foo: true,
     bar: -2147483649,
     foobar: {
-      foo: new Buffer([1, 2, 3, 4, 5]),
+      foo: Buffer.from([1, 2, 3, 4, 5]),
       bar: 1.5,
       foobar: [true, false, 'abcdefghijkmonpqrstuvwxyz']
     }
@@ -45,13 +45,13 @@ const medium = {
 };
 for (let i = 0; i < 32; i++) {
   medium.map['a'.repeat(i)] = 'a'.repeat(i);
-  medium.map['b'.repeat(i)] = new Buffer('b'.repeat(i));
+  medium.map['b'.repeat(i)] = Buffer.from('b'.repeat(i));
 }
 
 const large = {
   unsigned: [1, 2, 3, 4, { b: { c: [128, 256, 65536, 4294967296] } }],
   signed: [-1, -2, -3, -4, { b: { c: [-33, -129, -32769, -2147483649] } }],
-  bin: [new Buffer('abc'), new Buffer('a'.repeat(256)), new Buffer('a'.repeat(65535))],
+  bin: [Buffer.from('abc'), Buffer.from('a'.repeat(256)), Buffer.from('a'.repeat(65535))],
   str: ['abc', 'g'.repeat(32), 'h'.repeat(256), 'g'.repeat(65535)],
   array: [[], array(16), array(256)],
   map: {},
@@ -61,7 +61,7 @@ const large = {
 };
 for (let i = 0; i < 1024; i++) {
   large.map['a'.repeat(i)] = 'a'.repeat(i);
-  large.map['b'.repeat(i)] = new Buffer('b'.repeat(i));
+  large.map['b'.repeat(i)] = Buffer.from('b'.repeat(i));
 }
 
 exports.tiny = tiny;

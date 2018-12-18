@@ -22,10 +22,10 @@ suite
   JSON.parse(json.toString());
 })
 
-.addInput('tiny', [notepack.encode(data.tiny), msgpackJs.encode(data.tiny), msgpackLite.encode(data.tiny), new Buffer(JSON.stringify(data.tiny))])
-.addInput('small', [notepack.encode(data.small), msgpackJs.encode(data.small), msgpackLite.encode(data.small), new Buffer(JSON.stringify(data.small))])
-.addInput('medium', [notepack.encode(data.medium), msgpackJs.encode(data.medium), msgpackLite.encode(data.medium), new Buffer(JSON.stringify(data.medium))])
-.addInput('large', [notepack.encode(data.large), msgpackJs.encode(data.large), msgpackLite.encode(data.large), new Buffer(JSON.stringify(data.large))])
+.addInput('tiny', [notepack.encode(data.tiny), msgpackJs.encode(data.tiny), msgpackLite.encode(data.tiny), Buffer.from(JSON.stringify(data.tiny))])
+.addInput('small', [notepack.encode(data.small), msgpackJs.encode(data.small), msgpackLite.encode(data.small), Buffer.from(JSON.stringify(data.small))])
+.addInput('medium', [notepack.encode(data.medium), msgpackJs.encode(data.medium), msgpackLite.encode(data.medium), Buffer.from(JSON.stringify(data.medium))])
+.addInput('large', [notepack.encode(data.large), msgpackJs.encode(data.large), msgpackLite.encode(data.large), Buffer.from(JSON.stringify(data.large))])
 
 .on('complete', function () {
   console.log(this.table.toString());

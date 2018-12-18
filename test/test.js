@@ -19,7 +19,7 @@ function map(length) {
 }
 
 function checkDecode(value, hex) {
-  const decodedValue = notepack.decode(new Buffer(hex, 'hex'));
+  const decodedValue = notepack.decode(Buffer.from(hex, 'hex'));
   expect(decodedValue).to.deep.equal(value, 'decode failed');
 }
 
@@ -79,33 +79,33 @@ describe('notepack', function () {
   });
 
   it('bin 8', function () {
-    check(new Buffer(0), 'c4' + '00');
-    check(new Buffer([0]), 'c4' + '01' + '00');
-    check(new Buffer('hello'), 'c4' + '05' + '68656c6c6f');
+    check(Buffer.allocUnsafe(0), 'c4' + '00');
+    check(Buffer.from([0]), 'c4' + '01' + '00');
+    check(Buffer.from('hello'), 'c4' + '05' + '68656c6c6f');
   });
 
   it('bin 16', function () {
-    check(new Buffer('a'.repeat(256)), 'c5' + '0100' + '61'.repeat(256));
+    check(Buffer.from('a'.repeat(256)), 'c5' + '0100' + '61'.repeat(256));
   });
 
   it('bin 32', function () {
-    check(new Buffer('a'.repeat(65536)), 'c6' + '00010000' + '61'.repeat(65536));
+    check(Buffer.from('a'.repeat(65536)), 'c6' + '00010000' + '61'.repeat(65536));
   });
 
   it('ext 8', function () {
-    checkDecode([127, new Buffer('hello')], 'c7' + '05' + '7f' + '68656c6c6f');
+    checkDecode([127, Buffer.from('hello')], 'c7' + '05' + '7f' + '68656c6c6f');
     check(Uint8Array.of(1, 2, 3, 4).buffer, 'c7' + '04' + '00' + '01020304');
   });
 
   it('ext 16', function () {
-    checkDecode([1, new Buffer('a'.repeat(256))], 'c8' + '0100' + '01' + '61'.repeat(256));
+    checkDecode([1, Buffer.from('a'.repeat(256))], 'c8' + '0100' + '01' + '61'.repeat(256));
     const array = new Uint8Array(256);
     array.fill(8);
     check(array.buffer, 'c8' + '0100' + '00' + '08'.repeat(256));
   });
 
   it('ext 32', function () {
-    checkDecode([-128, new Buffer('a'.repeat(65536))], 'c9' + '00010000' + '80' + '61'.repeat(65536));
+    checkDecode([-128, Buffer.from('a'.repeat(65536))], 'c9' + '00010000' + '80' + '61'.repeat(65536));
     const array = new Uint8Array(65536);
     array.fill(9);
     check(array.buffer, 'c9' + '00010000' + '00' + '09'.repeat(65536));
@@ -115,7 +115,7 @@ describe('notepack', function () {
   // JavaScript doesn't support single precision floating point numbers
 
   it('float 32', function () {
-    const buf = new Buffer(5);
+    const buf = Buffer.allocUnsafe(5);
     buf.writeUInt8(0xca, 0);
     buf.writeFloatBE(0.5, 1);
     checkDecode(0.5, buf.toString('hex'));
@@ -207,15 +207,15 @@ describe('notepack', function () {
 
   it('fixext 1 / undefined', function () {
     check(undefined, 'd40000');
-    checkDecode([127, new Buffer('a')], 'd4' + '7f' + '61');
+    checkDecode([127, Buffer.from('a')], 'd4' + '7f' + '61');
   });
 
   it('fixext 2', function () {
-    checkDecode([127, new Buffer('ab')], 'd5' + '7f' + '6162');
+    checkDecode([127, Buffer.from('ab')], 'd5' + '7f' + '6162');
   });
 
   it('fixext 4', function () {
-    checkDecode([127, new Buffer('abcd')], 'd6' + '7f' + '61626364');
+    checkDecode([127, Buffer.from('abcd')], 'd6' + '7f' + '61626364');
   });
 
   it('fixext 8 / Date', function () {
@@ -225,11 +225,11 @@ describe('notepack', function () {
     check(new Date('2000-06-13T00:00:00.000Z'), 'd700000000dfb7629c00');
     check(new Date('2005-12-31T23:59:59.999Z'), 'd7000000010883436bff');
     check(new Date('2140-01-01T13:14:15.678Z'), 'd700000004e111a31efe');
-    checkDecode([127, new Buffer('abcd'.repeat(2))], 'd7' + '7f' + '61626364'.repeat(2));
+    checkDecode([127, Buffer.from('abcd'.repeat(2))], 'd7' + '7f' + '61626364'.repeat(2));
   });
 
   it('fixext 16', function () {
-    checkDecode([-128, new Buffer('abcd'.repeat(4))], 'd8' + '80' + '61626364'.repeat(4));
+    checkDecode([-128, Buffer.from('abcd'.repeat(4))], 'd8' + '80' + '61626364'.repeat(4));
   });
 
   it('str 8', function () {
@@ -291,7 +291,7 @@ describe('notepack', function () {
     const expected = {
       unsigned: [1, 2, 3, 4, { b: { c: [128, 256, 65536, 4294967296] } }],
       signed: [-1, -2, -3, -4, { b: { c: [-33, -129, -32769, -2147483649] } }],
-      bin: [new Buffer('abc'), new Buffer('a'.repeat(256)), new Buffer('c'.repeat(65536))],
+      bin: [Buffer.from('abc'), Buffer.from('a'.repeat(256)), Buffer.from('c'.repeat(65536))],
       str: ['abc', 'g'.repeat(32), 'h'.repeat(256), 'i'.repeat(65536)],
       array: [[], array(16), array(65536)],
       map: {},
