@@ -29,10 +29,10 @@ var decoded = notepack.decode(encoded); // { foo: 'bar' }
 
 ## Browser
 
-A browser version of notepack is also available (7.6 kB minified)
+A browser version of notepack is also available (2.0 kB minified/gzipped)
 
 ```html
-<script src="https://rawgit.com/darrachequesne/notepack/master/dist/notepack.js"></script>
+<script src="https://unpkg.com/notepack.io@2.2.0/dist/notepack.min.js"></script>
 <script>
   console.log(notepack.decode(notepack.encode([1, '2', new Date()])));
   // [1, "2", Thu Dec 08 2016 00:00:01 GMT+0100 (CET)]
