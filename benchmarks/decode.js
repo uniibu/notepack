@@ -1,11 +1,11 @@
-var notepack = require('../');
-var msgpackJs = require('msgpack-js');
-var msgpackLite = require('msgpack-lite');
-var data = require('./data');
+const notepack = require('../');
+const msgpackJs = require('msgpack-js');
+const msgpackLite = require('msgpack-lite');
+const data = require('./data');
 
-var Benchtable = require('benchtable');
+const Benchtable = require('benchtable');
 
-var suite = new Benchtable;
+const suite = new Benchtable;
 
 suite
 .addFunction('notepack', function (m, js, node, json) {

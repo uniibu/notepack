@@ -1,30 +1,30 @@
 'use strict';
 
-var notepack = require('../');
+const notepack = require('../');
 
 function array(length) {
-  var arr = new Array(length);
-  for (var i = 0; i < arr.length; i++) {
+  const arr = new Array(length);
+  for (let i = 0; i < arr.length; i++) {
     arr[i] = 0;
   }
   return arr;
 }
 
 function map(length) {
-  var result = {};
-  for (var i = 0; i < length; i++) {
+  const result = {};
+  for (let i = 0; i < length; i++) {
     result[i + ''] = 0;
   }
   return result;
 }
 
 function checkDecode(value, hex) {
-  var decodedValue = notepack.decode(new Buffer(hex, 'hex'));
+  const decodedValue = notepack.decode(new Buffer(hex, 'hex'));
   expect(decodedValue).to.deep.equal(value, 'decode failed');
 }
 
 function checkEncode(value, hex) {
-  var encodedHex = notepack.encode(value).toString('hex');
+  const encodedHex = notepack.encode(value).toString('hex');
   expect(encodedHex).to.equal(hex, 'encode failed');
 }
 
@@ -99,14 +99,14 @@ describe('notepack', function () {
 
   it('ext 16', function () {
     checkDecode([1, new Buffer('a'.repeat(256))], 'c8' + '0100' + '01' + '61'.repeat(256));
-    var array = new Uint8Array(256);
+    const array = new Uint8Array(256);
     array.fill(8);
     check(array.buffer, 'c8' + '0100' + '00' + '08'.repeat(256));
   });
 
   it('ext 32', function () {
     checkDecode([-128, new Buffer('a'.repeat(65536))], 'c9' + '00010000' + '80' + '61'.repeat(65536));
-    var array = new Uint8Array(65536);
+    const array = new Uint8Array(65536);
     array.fill(9);
     check(array.buffer, 'c9' + '00010000' + '00' + '09'.repeat(65536));
   });
@@ -115,7 +115,7 @@ describe('notepack', function () {
   // JavaScript doesn't support single precision floating point numbers
 
   it('float 32', function () {
-    var buf = new Buffer(5);
+    const buf = new Buffer(5);
     buf.writeUInt8(0xca, 0);
     buf.writeFloatBE(0.5, 1);
     checkDecode(0.5, buf.toString('hex'));
@@ -263,21 +263,21 @@ describe('notepack', function () {
       { 0: 0, 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9, a: 10, b: 11, c: 12, d: 13, e: 14, f: 15 },
       'de' + '0010' + 'a13000a13101a13202a13303a13404a13505a13606a13707a13808a13909a1610aa1620ba1630ca1640da1650ea1660f'
     );
-    var map16 = map(65535);
-    var encoded = notepack.encode(map16);
+    const map16 = map(65535);
+    const encoded = notepack.encode(map16);
     expect(encoded.toString('hex', 0, 3)).to.equal('deffff');
     expect(notepack.decode(encoded)).to.deep.equal(map16);
   });
 
   it('map 32', function () {
-    var map32 = map(65536);
-    var encoded = notepack.encode(map32);
+    const map32 = map(65536);
+    const encoded = notepack.encode(map32);
     expect(encoded.toString('hex', 0, 5)).to.equal('df00010000');
     expect(notepack.decode(encoded)).to.deep.equal(map32);
   });
 
   it('toJSON', function () {
-    var obj = {
+    const obj = {
       a: 'b',
       toJSON: function () {
         return 'c';
@@ -288,7 +288,7 @@ describe('notepack', function () {
 
   it('all formats', function () {
     this.timeout(20000);
-    var expected = {
+    const expected = {
       unsigned: [1, 2, 3, 4, { b: { c: [128, 256, 65536, 4294967296] } }],
       signed: [-1, -2, -3, -4, { b: { c: [-33, -129, -32769, -2147483649] } }],
       bin: [new Buffer('abc'), new Buffer('a'.repeat(256)), new Buffer('c'.repeat(65536))],
@@ -309,7 +309,7 @@ describe('notepack', function () {
   });
 
   it('10000', function () {
-    var fixture = require('./fixtures/10000.json');
+    const fixture = require('./fixtures/10000.json');
 
     expect(notepack.decode(notepack.encode(fixture))).to.deep.equal(fixture);
   });

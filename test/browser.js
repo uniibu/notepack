@@ -1,21 +1,21 @@
 'use strict';
 
-var notepack = {
+const notepack = {
   encode: require('../browser/encode'),
   decode: require('../browser/decode')
 };
 
 function array(length) {
-  var arr = new Array(length);
-  for (var i = 0; i < arr.length; i++) {
+  const arr = new Array(length);
+  for (let i = 0; i < arr.length; i++) {
     arr[i] = 0;
   }
   return arr;
 }
 
 function map(length) {
-  var result = {};
-  for (var i = 0; i < length; i++) {
+  const result = {};
+  for (let i = 0; i < length; i++) {
     result[i + ''] = 0;
   }
   return result;
@@ -27,8 +27,8 @@ describe('notepack (browser build)', function() {
   });
 
   it('offset ArrayBuffer view', function() {
-    var buffer = new ArrayBuffer(14);
-    var view = new Uint8Array(buffer);
+    const buffer = new ArrayBuffer(14);
+    const view = new Uint8Array(buffer);
 
     // Fill with junk before setting the encoded data
     view.fill(0xFF);
@@ -41,7 +41,7 @@ describe('notepack (browser build)', function() {
   });
 
   it('toJSON', function () {
-    var obj = {
+    const obj = {
       a: 'b',
       toJSON: function () {
         return 'c';
@@ -63,7 +63,7 @@ describe('notepack (browser build)', function() {
 
   it('all formats', function () {
     this.timeout(20000);
-    var expected = {
+    const expected = {
       unsigned: [1, 2, 3, 4, { b: { c: [128, 256, 65536, 4294967296] } }],
       signed: [-1, -2, -3, -4, { b: { c: [-33, -129, -32769, -2147483649] } }],
       bin: [Uint8Array.of('1', '2', '3').buffer, Uint8Array.from('1'.repeat(256)).buffer, Uint8Array.from('2'.repeat(65536)).buffer],
