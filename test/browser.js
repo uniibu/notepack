@@ -4,6 +4,7 @@ const notepack = {
   encode: require('../browser/encode'),
   decode: require('../browser/decode')
 };
+const expect = require('chai').expect;
 
 function array(length) {
   const arr = new Array(length);
