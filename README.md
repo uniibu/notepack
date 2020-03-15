@@ -32,7 +32,7 @@ var decoded = notepack.decode(encoded); // { foo: 'bar' }
 A browser version of notepack is also available (2.0 kB minified/gzipped)
 
 ```html
-<script src="https://unpkg.com/notepack.io@2.2.0/dist/notepack.min.js"></script>
+<script src="https://unpkg.com/notepack.io@2.3.0/dist/notepack.min.js"></script>
 <script>
   console.log(notepack.decode(notepack.encode([1, '2', new Date()])));
   // [1, "2", Thu Dec 08 2016 00:00:01 GMT+0100 (CET)]
@@ -53,29 +53,29 @@ Encoding (this will take a while):
 +----------------------------+-------------------+-----------------+----------------+---------------+
 |                            │ tiny              │ small           │ medium         │ large         |
 +----------------------------+-------------------+-----------------+----------------+---------------+
-| notepack                   │ 2,033,101 ops/sec │ 430,577 ops/sec │ 31,162 ops/sec │ 256 ops/sec   |
+| notepack                   │ 2,187,481 ops/sec │ 510,581 ops/sec │ 39,187 ops/sec │ 231 ops/sec   |
 +----------------------------+-------------------+-----------------+----------------+---------------+
-| msgpack-js                 │ 171,300 ops/sec   │ 100,205 ops/sec │ 10,121 ops/sec │ 159 ops/sec   |
+| msgpack-js                 │ 111,209 ops/sec   │ 95,346 ops/sec  │ 9,896 ops/sec  │ 121 ops/sec   |
 +----------------------------+-------------------+-----------------+----------------+---------------+
-| msgpack-lite               │ 455,017 ops/sec   │ 189,415 ops/sec │ 23,872 ops/sec │ 399 ops/sec   |
+| msgpack-lite               │ 524,993 ops/sec   │ 195,466 ops/sec │ 18,269 ops/sec │ 242 ops/sec   |
 +----------------------------+-------------------+-----------------+----------------+---------------+
-| @msgpack/msgpack           │ 621,609 ops/sec   │ 364,816 ops/sec │ 36,157 ops/sec │ 105 ops/sec   |
+| @msgpack/msgpack           │ 723,885 ops/sec   │ 292,447 ops/sec │ 30,438 ops/sec │ 80.26 ops/sec |
 +----------------------------+-------------------+-----------------+----------------+---------------+
-| JSON.stringify (to Buffer) │ 1,484,205 ops/sec │ 326,130 ops/sec │ 18,409 ops/sec │ 31.23 ops/sec |
+| JSON.stringify (to Buffer) │ 1,359,120 ops/sec │ 335,024 ops/sec │ 15,721 ops/sec │ 25.97 ops/sec |
 +----------------------------+-------------------+-----------------+----------------+---------------+
 Decoding (this will take a while):
 +--------------------------+-------------------+-----------------+----------------+---------------+
 |                          │ tiny              │ small           │ medium         │ large         |
 +--------------------------+-------------------+-----------------+----------------+---------------+
-| notepack                 │ 1,663,031 ops/sec │ 382,912 ops/sec │ 31,880 ops/sec │ 294 ops/sec   |
+| notepack                 │ 3,165,012 ops/sec │ 642,348 ops/sec │ 32,173 ops/sec │ 249 ops/sec   |
 +--------------------------+-------------------+-----------------+----------------+---------------+
-| msgpack-js               │ 1,142,658 ops/sec │ 273,856 ops/sec │ 23,427 ops/sec │ 264 ops/sec   |
+| msgpack-js               │ 1,255,151 ops/sec │ 280,944 ops/sec │ 24,396 ops/sec │ 243 ops/sec   |
 +--------------------------+-------------------+-----------------+----------------+---------------+
-| msgpack-lite             │ 658,482 ops/sec   │ 143,789 ops/sec │ 12,412 ops/sec │ 202 ops/sec   |
+| msgpack-lite             │ 667,059 ops/sec   │ 144,927 ops/sec │ 11,922 ops/sec │ 175 ops/sec   |
 +--------------------------+-------------------+-----------------+----------------+---------------+
-| @msgpack/msgpack         │ 2,056,936 ops/sec │ 474,913 ops/sec │ 21,109 ops/sec │ 101 ops/sec   |
+| @msgpack/msgpack         │ 1,760,026 ops/sec │ 353,698 ops/sec │ 18,816 ops/sec │ 45.68 ops/sec |
 +--------------------------+-------------------+-----------------+----------------+---------------+
-| JSON.parse (from Buffer) │ 1,378,336 ops/sec │ 364,853 ops/sec │ 24,548 ops/sec │ 49.16 ops/sec |
+| JSON.parse (from Buffer) │ 1,750,845 ops/sec │ 407,212 ops/sec │ 24,999 ops/sec │ 35.77 ops/sec |
 +--------------------------+-------------------+-----------------+----------------+---------------+
 * Note that JSON is provided as an indicative comparison only
 ```
